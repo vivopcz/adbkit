@@ -2,6 +2,7 @@ declare interface Device {
     id: string;
     type: string;
     path?: string;
+    model?: string;
 }
 
 declare interface Forwards {
