@@ -34,30 +34,35 @@ declare interface StartOptions {
 }
 
 
+declare interface InstallOptions {
+    apk: string;
+    args?: Array<string>
+}
+
 
 declare class Client {
 
-    listDevices(callback?: (err: string, devices: Array<Device>) => void): Promise<any>;
+    listDevices(callback?: (err: Error, devices: Array<Device>) => void): Promise<any>;
 
-    getFeatures(id: string, callback?: (err: string, feature: Array<boolean>) => boolean): Promise<any>;
+    getFeatures(id: string, callback?: (err: Error, feature: Array<boolean>) => boolean): Promise<any>;
 
-    getProperties(id: string, callback?: (err: string, properties: Array<boolean>) => boolean): Promise<any>;
+    getProperties(id: string, callback?: (err: Error, properties: Array<boolean>) => boolean): Promise<any>;
 
-    install(id: string, apk: string, callback?: (err: string) => void): Promise<any>;
+    install(id: string, options: InstallOptions, callback?: (err: Error) => void): Promise<any>;
 
-    trackDevices(callback?: (err: string, tracker: Tracker) => void): Promise<any>;
+    trackDevices(callback?: (err: Error, tracker: Tracker) => void): Promise<any>;
 
-    isInstalled(id: string, pkg: string, callback?: (err: string, installed: boolean) => boolean): Promise<any>;
+    isInstalled(id: string, pkg: string, callback?: (err: Error, installed: boolean) => boolean): Promise<any>;
 
     listForwards(id: string, callback?: (err: string, forwards: Forwards) => void): Promise<any>;
 
-    forward(id: string, local: string, remote: string, callback?: (err: string) => void): Promise<any>;
+    forward(id: string, local: string, remote: string, callback?: (err: Error) => void): Promise<any>;
 
-    startActivity(id: string, options: StartOptions, callback?: (err: string) => void): Promise<any>;
+    startActivity(id: string, options: StartOptions, callback?: (err: Error) => void): Promise<any>;
 
-    startService(id: string, options: StartOptions, callback?: (err: string) => void): Promise<any>;
+    startService(id: string, options: StartOptions, callback?: (err: Error) => void): Promise<any>;
 
-    shell(id: string, command: string, callback?: (err: string, output: object) => void): Promise<any>;
+    shell(id: string, command: string, callback?: (err: Error, output: object) => void): Promise<any>;
 
 }
 
@@ -70,7 +75,7 @@ declare interface Options {
 
 
 declare class Util {
-    readAll(stream: any, callback?: (err: string) => void): Promise<any>;
+    readAll(stream: any, callback?: (err: Error) => void): Promise<any>;
 }
 
 

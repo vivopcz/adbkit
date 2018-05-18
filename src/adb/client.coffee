@@ -354,8 +354,11 @@ class Client
           .execute pkg
       .nodeify callback
 
-  install: (serial, apk, callback) ->
+  install: (serial, options, callback) ->
+    apk = options.apk
+    args = options.args ||= []
     temp = Sync.temp if typeof apk is 'string' then apk else '_stream.apk'
+
     this.push serial, apk, temp
       .then (transfer) =>
         resolver = Promise.defer()
@@ -364,7 +367,7 @@ class Client
           resolver.reject err
 
         transfer.on 'end', endListener = =>
-          resolver.resolve this.installRemote serial, temp
+          resolver.resolve this.installRemote serial, temp, args
 
         resolver.promise.finally ->
           transfer.removeListener 'error', errorListener
@@ -372,11 +375,11 @@ class Client
 
       .nodeify callback
 
-  installRemote: (serial, apk, callback) ->
+  installRemote: (serial, apk, args, callback) ->
     this.transport serial
       .then (transport) =>
         new InstallCommand transport
-          .execute apk
+          .execute apk, args
           .then =>
             this.shell serial, ['rm', '-f', apk]
           .then (stream) ->
