@@ -71,8 +71,8 @@ class Client
         resolver.resolve conn
       .connect()
     resolver.promise.finally ->
-      conn.removeListener 'error', errorListener
-      conn.removeListener 'connect', connectListener
+      # conn.removeListener 'error', errorListener
+      # conn.removeListener 'connect', connectListener
 
   version: (callback) ->
     this.connection()
