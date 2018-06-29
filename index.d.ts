@@ -64,6 +64,9 @@ declare class Client {
 
     shell(id: string, command: string, callback?: (err: Error, output: object) => void): Promise<any>;
 
+    version(callback?: (err: Error, version: number) => void): Promise<any>;
+
+    kill(callback?: (err: Error) => void): Promise<any>;
 }
 
 
