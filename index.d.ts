@@ -3,6 +3,7 @@ declare interface Device {
     type: string;
     path?: string;
     model?: string;
+    brand?: string;
 }
 
 declare interface Forwards {
