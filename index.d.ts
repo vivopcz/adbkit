@@ -32,6 +32,7 @@ declare interface StartOptions {
     component?: string;
     flags?: number;
     extras?: Object;
+	foreground?: number;
 }
 
 
