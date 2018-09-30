@@ -4,6 +4,7 @@ declare interface Device {
     path?: string;
     model?: string;
     brand?: string;
+    sdkVer?: number;
 }
 
 declare interface Forwards {
